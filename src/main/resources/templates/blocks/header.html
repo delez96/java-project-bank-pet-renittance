@@ -1,0 +1,35 @@
+<div th:fragment="header" xmlns:sec="http://www.w3.org/1999/xhtml">
+    <div class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+        <div sec:authorize="isAuthenticated()">
+            <span class="navbar-brand col-md-3 col-lg-2 me-0 px-3" sec:authentication="name"></span>
+        </div>
+        <div sec:authorize="!isAuthenticated()">
+            <span class="navbar-brand col-md-3 col-lg-2 me-0 px-3" ></span>
+        </div>
+        <div>
+            <span class="navbar-brand col-md-3 col-lg-2 me-0 px-3" th:text="'Курс доллара: ' + ${dollar}"></span>
+        </div>
+        <div>
+            <span class="navbar-brand col-md-3 col-lg-2 me-0 px-3" th:text="'Курс Евро: ' + ${euro}"></span>
+        </div>
+
+
+        <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-nav">
+
+            <div sec:authorize="!isAuthenticated()">
+                <form th:action="@{/login}" method="get">
+                    <input type="submit" value="Авторизация"/>
+                </form>
+            </div>
+
+            <div sec:authorize="isAuthenticated()">
+                <form th:action="@{/logout}" method="post">
+                    <input type="submit" value="Выйти"/>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
